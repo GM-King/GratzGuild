@@ -1,0 +1,6 @@
+__pycache__/
+tests/output/*-layout.json
+
+*.bak-*
+releases/
+tests/output/

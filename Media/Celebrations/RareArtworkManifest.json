@@ -1,0 +1,149 @@
+{
+  "origin": "User-supplied artwork",
+  "chancePerCelebration": 0.05,
+  "assets": [
+    {
+      "character": "OrcMale",
+      "png": "OrcMaleRare.png",
+      "texture": "OrcMaleRare.tga",
+      "source": "OrcMaleRare.png",
+      "sourceMode": "RGBA",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "textureSize": 512,
+      "sourceSHA256": "6e67ca8bffa38273678ca7a02616ee2e77f2cf07eb798c7c44b48e5e83a317f7"
+    },
+    {
+      "character": "OrcFemale",
+      "png": "OrcFemaleRare.png",
+      "texture": "OrcFemaleRare.tga",
+      "source": "OrcFemaleRare.png",
+      "sourceMode": "RGBA",
+      "sourceDimensions": [
+        1145,
+        1374
+      ],
+      "textureSize": 512,
+      "sourceSHA256": "7f82e6ad02e1ec20d676268bc66ebdee20085f2519b37269a61d3c495970c33a"
+    },
+    {
+      "character": "TrollMale",
+      "png": "TrollMaleRare.png",
+      "texture": "TrollMaleRare.tga",
+      "source": "TrollMaleRare.png",
+      "sourceMode": "RGBA",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "textureSize": 512,
+      "sourceSHA256": "7b5152e06dbf52ca07110c871e63a93e70fc091ecfaf8d9650bd1e298f39eaa5"
+    },
+    {
+      "character": "TrollFemale",
+      "png": "TrollFemaleRare.png",
+      "texture": "TrollFemaleRare.tga",
+      "source": "TrollFemaleRare.png",
+      "sourceMode": "RGBA",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "textureSize": 512,
+      "sourceSHA256": "114bd029bec9c9480dea62ecb2b1e9d91a67aa4aefa1b610f6c1325fffa585e4"
+    },
+    {
+      "character": "TaurenMale",
+      "png": "TaurenMaleRare.png",
+      "texture": "TaurenMaleRare.tga",
+      "source": "TaurenMaleRare.png",
+      "sourceMode": "RGBA",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "textureSize": 512,
+      "sourceSHA256": "d8822aaae91239c78a77f23560014de4a46b3140a0ed3d47f248575f52e40133"
+    },
+    {
+      "character": "TaurenFemale",
+      "png": "TaurenFemaleRare.png",
+      "texture": "TaurenFemaleRare.tga",
+      "source": "TaurenFemaleRare.png",
+      "sourceMode": "RGBA",
+      "sourceDimensions": [
+        1122,
+        1402
+      ],
+      "textureSize": 512,
+      "sourceSHA256": "6301f4ea6c51261196957060eafd04d47f61ad9935dc552a938e00bb691c81cf"
+    },
+    {
+      "character": "UndeadMale",
+      "png": "UndeadMaleRare.png",
+      "texture": "UndeadMaleRare.tga",
+      "source": "UndeadMaleRare.png",
+      "sourceMode": "RGBA",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "textureSize": 512,
+      "sourceSHA256": "bf072d5639e2d174971872f439c205b0bb787926711b2239754343d17ec573ff"
+    },
+    {
+      "character": "UndeadFemale",
+      "png": "UndeadFemaleRare.png",
+      "texture": "UndeadFemaleRare.tga",
+      "source": "UndeadFemaleRare.png",
+      "sourceMode": "RGBA",
+      "sourceDimensions": [
+        1122,
+        1402
+      ],
+      "textureSize": 512,
+      "sourceSHA256": "e205b65330e5fb91409c409b9daa694fb51cb319ccfe0698a5353b9cc15b3aed"
+    },
+    {
+      "character": "SkyborneMale",
+      "png": "SkyborneMaleRare.png",
+      "texture": "SkyborneMaleRare.tga",
+      "source": "SkyborneMaleRare.png",
+      "sourceMode": "RGBA",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "textureSize": 512,
+      "sourceSHA256": "23410a625e3b61b3d3d2cf0dc94214b094fea2c038663189452096bc1d4b7957"
+    },
+    {
+      "character": "SkyborneFemale",
+      "png": "SkyborneFemaleRare.png",
+      "texture": "SkyborneFemaleRare.tga",
+      "source": "SkyborneFemaleRare.png",
+      "sourceMode": "RGBA",
+      "sourceDimensions": [
+        1122,
+        1402
+      ],
+      "textureSize": 512,
+      "sourceSHA256": "0db000226cb96346b4bf5aaeb62455fb76aca8e83d1215043b1b78974ce51970"
+    },
+    {
+      "character": "ForTheHorde",
+      "png": "ForTheHordeRare.png",
+      "texture": "ForTheHordeRare.tga",
+      "source": "ForTheHordeRare.png",
+      "sourceMode": "RGBA",
+      "sourceDimensions": [
+        1122,
+        1402
+      ],
+      "textureSize": 1024,
+      "sourceSHA256": "2066e3ed8d3d3e2a3ae46e040f85e6129c4cd1544ad94d4211587ec1af33ea36"
+    }
+  ]
+}

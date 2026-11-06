@@ -1,0 +1,347 @@
+{
+  "catalog": {
+    "cheer": [
+      {
+        "file": "sounds\\cheer\\BloodElfFemaleCheer01.ogg",
+        "portrait": "SkyborneFemale",
+        "label": "Skyborne female",
+        "duration": 1.462,
+        "sha256": "c2ae7cb7bd9d62e634b8709d3991c15199f752a077cd403950dc8dc09988b42b"
+      },
+      {
+        "file": "sounds\\cheer\\BloodElfFemaleCheer02.ogg",
+        "portrait": "SkyborneFemale",
+        "label": "Skyborne female",
+        "duration": 0.902,
+        "sha256": "d31f3c3cf163055c79665f10605a4344c3cfea1f00f4b6895fd9be8983298173"
+      },
+      {
+        "file": "sounds\\cheer\\BloodElfMaleCheer01.ogg",
+        "portrait": "SkyborneMale",
+        "label": "Skyborne male",
+        "duration": 2.343,
+        "sha256": "f80164e58d6bdc13ce8fe76043cc8e7feeafb1ff0bc2ecb8b501ae3cdb6568c9"
+      },
+      {
+        "file": "sounds\\cheer\\BloodElfMaleCheer02.ogg",
+        "portrait": "SkyborneMale",
+        "label": "Skyborne male",
+        "duration": 0.708,
+        "sha256": "be16d49173fe1acc9fbac7f494d357c8b1c3941fff42b0a1215c216e6fc572ef"
+      },
+      {
+        "file": "sounds\\cheer\\OrcFemaleCheer01.ogg",
+        "portrait": "OrcFemale",
+        "label": "Orc female",
+        "duration": 0.928,
+        "sha256": "aad15f12979ca684500d92567d7957148801e8d7491e9a49fe7231e8c19b4c8f"
+      },
+      {
+        "file": "sounds\\cheer\\OrcFemaleCheer02.ogg",
+        "portrait": "OrcFemale",
+        "label": "Orc female",
+        "duration": 1.588,
+        "sha256": "da6f1964c624d87d72e5a1bb1ecce8ee258700c96639ade637e35f000e918f16"
+      },
+      {
+        "file": "sounds\\cheer\\OrcMaleCheer01.ogg",
+        "portrait": "OrcMale",
+        "label": "Orc male",
+        "duration": 1.433,
+        "sha256": "853258fde3c0cf8064c4a466a61f51231694a28dea3717983134ef10b5a81f34"
+      },
+      {
+        "file": "sounds\\cheer\\OrcMaleCheer02.ogg",
+        "portrait": "OrcMale",
+        "label": "Orc male",
+        "duration": 1.694,
+        "sha256": "c03943dfde93db2cc52c790e936cd7f3d1728d0fa90ce7da4e922fccc1951458"
+      },
+      {
+        "file": "sounds\\cheer\\TaurenFemaleCheer01.ogg",
+        "portrait": "TaurenFemale",
+        "label": "Tauren female",
+        "duration": 1.474,
+        "sha256": "1c84a9f600547dd8e674417c8142acede89973b9e2a74a592d6fec6ca2adb7ae"
+      },
+      {
+        "file": "sounds\\cheer\\TaurenFemaleCheer02.ogg",
+        "portrait": "TaurenFemale",
+        "label": "Tauren female",
+        "duration": 1.518,
+        "sha256": "01cae12f3cfa2928d002f5b6558c6d9d756cb402e481e12bda33db354e83457a"
+      },
+      {
+        "file": "sounds\\cheer\\TaurenMaleCheer01.ogg",
+        "portrait": "TaurenMale",
+        "label": "Tauren male",
+        "duration": 1.723,
+        "sha256": "53a63c8feb7dfd56ca742f258073bf51543849e3f3de6e040864cb59475a18d7"
+      },
+      {
+        "file": "sounds\\cheer\\TaurenMaleCheer02.ogg",
+        "portrait": "TaurenMale",
+        "label": "Tauren male",
+        "duration": 2.188,
+        "sha256": "0ac57cf4628e112fb81837a6c3dc9cf85159a09f1c889be4f9f284eea568866b"
+      },
+      {
+        "file": "sounds\\cheer\\TrollFemaleCheer01.ogg",
+        "portrait": "TrollFemale",
+        "label": "Troll female",
+        "duration": 0.797,
+        "sha256": "1036fa01d7ef1b736a9605084ae9482e60ebe1688c5ae7d53fc0f6b6325c60b3"
+      },
+      {
+        "file": "sounds\\cheer\\TrollFemaleCheer02.ogg",
+        "portrait": "TrollFemale",
+        "label": "Troll female",
+        "duration": 1.489,
+        "sha256": "1ad5076e836a5b947ec8054ca707d8966c8899071a7b1aabf695536b7c872b4c"
+      },
+      {
+        "file": "sounds\\cheer\\TrollMaleCheer01.ogg",
+        "portrait": "TrollMale",
+        "label": "Troll male",
+        "duration": 1.194,
+        "sha256": "fea019d2d58a36985b2ec4d9a7e5ce04af34eb40719f5377a2121c8364c8949d"
+      },
+      {
+        "file": "sounds\\cheer\\TrollMaleCheer02.ogg",
+        "portrait": "TrollMale",
+        "label": "Troll male",
+        "duration": 1.086,
+        "sha256": "eb40bbacc092c9b5b0347412c2d6a5607ebdbf6669cb2ffcd47a6111855dc28e"
+      },
+      {
+        "file": "sounds\\cheer\\TrollMaleCheer03.ogg",
+        "portrait": "TrollMale",
+        "label": "Troll male",
+        "duration": 1.182,
+        "sha256": "994ca87149a428ab78288d2923dac5c02decceb787f7e461e022e07a87b32647"
+      },
+      {
+        "file": "sounds\\cheer\\UndeadFemaleCheer01.ogg",
+        "portrait": "UndeadFemale",
+        "label": "Undead female",
+        "duration": 2.96,
+        "sha256": "292c027b54e89b3ae604d8f967465ab9b581e63c9d2be1915d68fb32cf9ad56b"
+      },
+      {
+        "file": "sounds\\cheer\\UndeadFemaleCheer02.ogg",
+        "portrait": "UndeadFemale",
+        "label": "Undead female",
+        "duration": 1.58,
+        "sha256": "2b00011a1af48daf399104cb48976a1f7725c960170609c682bf4b2a1d65498d"
+      },
+      {
+        "file": "sounds\\cheer\\UndeadMaleCheer01.ogg",
+        "portrait": "UndeadMale",
+        "label": "Undead male",
+        "duration": 2.068,
+        "sha256": "6377aa7833c1ae953ccf6a5f6e94dd66b0450cfe4b669f3bcaac4e2939188a4a"
+      },
+      {
+        "file": "sounds\\cheer\\UndeadMaleCheer02.ogg",
+        "portrait": "UndeadMale",
+        "label": "Undead male",
+        "duration": 1.474,
+        "sha256": "1d85f16d983e293261ed7aae2e603b18e1a36a119f6d47f8b299cf90db77cc15"
+      }
+    ],
+    "congrats": [
+      {
+        "file": "sounds\\congrats\\BloodElfFemaleCongratulations01.ogg",
+        "portrait": "SkyborneFemale",
+        "label": "Skyborne female",
+        "duration": 1.351,
+        "sha256": "54c8f8110b9cc9047da70212ac3ad52b131625c11161d64b601e45c88b403b35"
+      },
+      {
+        "file": "sounds\\congrats\\OrcFemaleCongratulations02.ogg",
+        "portrait": "OrcFemale",
+        "label": "Orc female",
+        "duration": 0.818,
+        "sha256": "40afbc0fb865685afdf6b83fde2b380eb7a901027d9a66c5ea10f27ddc05819d"
+      },
+      {
+        "file": "sounds\\congrats\\OrcFemaleCongratulations03.ogg",
+        "portrait": "OrcFemale",
+        "label": "Orc female",
+        "duration": 1.276,
+        "sha256": "68c90b53207ec3bc89b34ec4abc577ee9238a48d397740d670a26e37e56a64aa"
+      },
+      {
+        "file": "sounds\\congrats\\OrcMaleCongratulations01.ogg",
+        "portrait": "OrcMale",
+        "label": "Orc male",
+        "duration": 1.195,
+        "sha256": "d708aa02d13f1ff718b6957cfdaafd73d097614f411c5d3b26aae0fe3f31c2b6"
+      },
+      {
+        "file": "sounds\\congrats\\OrcMaleCongratulations02.ogg",
+        "portrait": "OrcMale",
+        "label": "Orc male",
+        "duration": 1.0,
+        "sha256": "fd27ed8ec9686d8285fb4a9edf4ceeb80794b84358d82876a1737caa1effb9d9"
+      },
+      {
+        "file": "sounds\\congrats\\OrcMaleCongratulations03.ogg",
+        "portrait": "OrcMale",
+        "label": "Orc male",
+        "duration": 1.059,
+        "sha256": "f25223733000eadba9750379269e582fc7497e004eb2cc8495798458ed053277"
+      },
+      {
+        "file": "sounds\\congrats\\TaurenFemaleCongratulations01.ogg",
+        "portrait": "TaurenFemale",
+        "label": "Tauren female",
+        "duration": 0.997,
+        "sha256": "e2c7e1413d744280ea807681cd979299613d40c220dfbafd1e9c59c472593fc1"
+      },
+      {
+        "file": "sounds\\congrats\\TaurenFemaleCongratulations02.ogg",
+        "portrait": "TaurenFemale",
+        "label": "Tauren female",
+        "duration": 0.78,
+        "sha256": "19252ca1533186aa0ff1411ca0a11d1afbba343dc751bfd7d1af745f5923553e"
+      },
+      {
+        "file": "sounds\\congrats\\TaurenFemaleCongratulations03.ogg",
+        "portrait": "TaurenFemale",
+        "label": "Tauren female",
+        "duration": 1.655,
+        "sha256": "353eb4ada0074ed78b0d937e35ff9a57f4a6149e34b335b207ea61d1cfbd8ebf"
+      },
+      {
+        "file": "sounds\\congrats\\TaurenMaleCongratulations01.ogg",
+        "portrait": "TaurenMale",
+        "label": "Tauren male",
+        "duration": 0.907,
+        "sha256": "fb7695ab87e4e19bcaaacd513e2802c48ce84510f168bf4c5076ce963c39cfe4"
+      },
+      {
+        "file": "sounds\\congrats\\TaurenMaleCongratulations02.ogg",
+        "portrait": "TaurenMale",
+        "label": "Tauren male",
+        "duration": 1.337,
+        "sha256": "fcae5486f77bd44346ffe5f1319da43fb4f2b096a1e4e9d8333bbf3d9aebe088"
+      },
+      {
+        "file": "sounds\\congrats\\TaurenMaleCongratulations03.ogg",
+        "portrait": "TaurenMale",
+        "label": "Tauren male",
+        "duration": 2.075,
+        "sha256": "15cbbad0f706b1dcbc13d210395f36f08e18c5778bd8adbd14cf2ea78223cf2e"
+      },
+      {
+        "file": "sounds\\congrats\\TrollFemaleCongratulations01.ogg",
+        "portrait": "TrollFemale",
+        "label": "Troll female",
+        "duration": 0.703,
+        "sha256": "93b2706a554327e19eaa607f06dae5cc388b647390cfbda7afc14f37c79bcbdd"
+      },
+      {
+        "file": "sounds\\congrats\\TrollFemaleCongratulations02.ogg",
+        "portrait": "TrollFemale",
+        "label": "Troll female",
+        "duration": 1.13,
+        "sha256": "06c1d61825bc06299ec753ff68ef7d1c772e3609c5b460c2a48ab2d3f34e4c9e"
+      },
+      {
+        "file": "sounds\\congrats\\TrollFemaleCongratulations03.ogg",
+        "portrait": "TrollFemale",
+        "label": "Troll female",
+        "duration": 1.325,
+        "sha256": "f9f1e09dabba9b0dd134b8e7fa701cf4a2a11d663d105903709e5260f670072a"
+      },
+      {
+        "file": "sounds\\congrats\\TrollMaleCongratulations01.ogg",
+        "portrait": "TrollMale",
+        "label": "Troll male",
+        "duration": 1.053,
+        "sha256": "723e08ca6114517d02ae70c61c0ed03daa1d6f545d958c5e78a152f9dbac446a"
+      },
+      {
+        "file": "sounds\\congrats\\TrollMaleCongratulations02.ogg",
+        "portrait": "TrollMale",
+        "label": "Troll male",
+        "duration": 1.07,
+        "sha256": "5f949475e8f14377863e217933f0bcc76147bbf1aed284de51dae3c2350e9173"
+      },
+      {
+        "file": "sounds\\congrats\\TrollMaleCongratulations03.ogg",
+        "portrait": "TrollMale",
+        "label": "Troll male",
+        "duration": 3.153,
+        "sha256": "ec1eaab7c097ef5e9f4fd7017466fda3ba6f139699fe09e8c28c151050aae556"
+      },
+      {
+        "file": "sounds\\congrats\\UndeadFemaleCongratulations02.ogg",
+        "portrait": "UndeadFemale",
+        "label": "Undead female",
+        "duration": 2.46,
+        "sha256": "92ae8685b0ec6bac1021db69f406390ceea9d96fd0c0a5c5ff48af18174d333c"
+      },
+      {
+        "file": "sounds\\congrats\\UndeadFemaleCongratulations04.ogg",
+        "portrait": "UndeadFemale",
+        "label": "Undead female",
+        "duration": 2.634,
+        "sha256": "a34e124ba18b85cfa2d69e163d9440bb20de65d76490af58a2c233c03df36385"
+      },
+      {
+        "file": "sounds\\congrats\\UndeadMaleCongratulations02.ogg",
+        "portrait": "UndeadMale",
+        "label": "Undead male",
+        "duration": 1.603,
+        "sha256": "4962e03d67b408602f4e7f48a5b43f6c9f487e9c50701dbc0cc731f7bf116ce5"
+      },
+      {
+        "file": "sounds\\congrats\\UndeadMaleCongratulations03.ogg",
+        "portrait": "UndeadMale",
+        "label": "Undead male",
+        "duration": 1.519,
+        "sha256": "7c53cb4358117e89cda10c85613421efb2507442b9520276d1f8e12ed9fd99d1"
+      },
+      {
+        "file": "sounds\\congrats\\VO_DHBloodElfMaleCongratulations01.ogg",
+        "portrait": "SkyborneMale",
+        "label": "Skyborne male",
+        "duration": 1.353,
+        "sha256": "ea5242125d84973e681d45ea2bcfcd9de7bc5d1aba7aa84a618a9d6098b39d45"
+      },
+      {
+        "file": "sounds\\congrats\\VO_DHBloodElfMaleCongratulations03.ogg",
+        "portrait": "SkyborneMale",
+        "label": "Skyborne male",
+        "duration": 1.524,
+        "sha256": "558a9139b786b19cf4c6405f7dcf46dd29042e83ca4800a8b37e151eeeb987e0"
+      }
+    ],
+    "horde": {
+      "file": "sounds\\for_the_horde.mp3",
+      "portrait": "ForTheHorde",
+      "label": "Thrall & Sylvanas",
+      "duration": 2.403,
+      "sha256": "3bea11bfc349fc3d4f7698ab83c65b40973cb32f95d9a198ade7cfc83154d029"
+    },
+    "hordeRare": {
+      "file": "sounds\\for_the_horde_rare.mp3",
+      "portrait": "ForTheHorde",
+      "label": "Thrall & Sylvanas",
+      "duration": 2.717,
+      "sha256": "9554680615305f1d42915ab8ee6762c67d88901d6627467a800404962477de83"
+    }
+  },
+  "duplicates": [
+    {
+      "file": "sounds\\congrats\\TrollFemaleCongratulations02(1).ogg",
+      "original": "sounds\\congrats\\TrollFemaleCongratulations02.ogg"
+    },
+    {
+      "file": "sounds\\congrats\\TrollFemaleCongratulations03(1).ogg",
+      "original": "sounds\\congrats\\TrollFemaleCongratulations03.ogg"
+    }
+  ]
+}
