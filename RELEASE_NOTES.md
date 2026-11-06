@@ -1,8 +1,6 @@
-# GratzGuild 1.3.3
+# GratzGuild 1.3.4
 
-- Recognize Gratez as congratulations and BIG DINGUS as a level-up phrase.
-- Show complete default phrase references in scrollable Settings, with the Save button always available.
-- Preserve existing messages, extra phrases, saved progress, cooldowns and reply windows.
-- Provide a clean install ZIP and an illustrated GitHub Pages guide with a clickable happy murloc.
+- Add Deselect all directly to the Ledger roster page.
+- Clear the entire saved announcement selection, including filtered and offscreen guildmates, without changing tracking or balances.
 
-70 offline Lua behavior and UI tests pass. Live WoW Forever gameplay verification remains pending.
+Live WoW Forever gameplay verification remains pending.

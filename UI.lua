@@ -188,6 +188,7 @@ function U.BuildLedger(parent)
     label(parent, "Search guildmates", 380, 10, 220, 20, 12, muted)
     U.online = check(parent, "Online only", 0, 47, 155, function(v) U.filters.online = v; U.offset = 0; U.RefreshLedger() end)
     U.debtOnly = check(parent, "In debt only", 183, 47, 155, function(v) U.filters.debt = v; U.offset = 0; U.RefreshLedger() end)
+    button(parent, "Deselect all", 370, 44, 165, function() if M.guild then C.Select(M.guild, "none") end; U.Refresh() end)
     button(parent, "Refresh roster", 551, 44, 149, function() M.RequestRoster(); M.CaptureRoster(); U.Refresh() end)
     local headers = {{"Guildmate", 40, 230, "name"}, {"Level", 295, 53, "level"}, {"Status", 365, 64, "online"}, {"Debt", 448, 62, "debt"}}
     for _, h in ipairs(headers) do
