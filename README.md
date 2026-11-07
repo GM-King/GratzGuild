@@ -10,6 +10,10 @@ Saved progress, commands, settings, tracking rules, artwork and sounds remain co
 
 Version **1.3.0** adds a permanent artwork collection, a movable and resizable popup guide, a single male-orc test, and fixes self-debt, self-grats and minimap placement. Five-minute reply windows and the rare Horde sound remain supported.
 
+## Version 1.3.6
+
+Fixes a Settings error when loading or editing multiline phrases and exclusions.
+
 ## Version 1.3.5
 
 The Ledger roster page now has a **Deselect all** button that clears the entire announcement selection, including names hidden by filters. Tracking and balances are preserved.
@@ -20,7 +24,7 @@ Settings now lists all default grats and ding phrases in a scrollable reference.
 
 ## Installation
 
-Download **GratzGuild-1.3.5.zip** from https://github.com/GM-King/GratzGuild/releases/tag/v1.3.5 and extract the `GratzGuild` folder into your Forever client's `Interface/AddOns` folder. Check that `Interface/AddOns/GratzGuild/GratzGuild.toc` exists, without an extra nested folder. No other addons are required. To update, close WoW and replace the addon folder; retain your WTF folder to preserve saved progress.
+Download **GratzGuild-1.3.6.zip** from https://github.com/GM-King/GratzGuild/releases/tag/v1.3.6 and extract the `GratzGuild` folder into your Forever client's `Interface/AddOns` folder. Check that `Interface/AddOns/GratzGuild/GratzGuild.toc` exists, without an extra nested folder. No other addons are required. To update, close WoW and replace the addon folder; retain your WTF folder to preserve saved progress.
 
 The player ZIP includes runtime textures and sounds. Original PNG artwork, development tools and tests are available in the source repository. Website: https://gm-king.github.io/GratzGuild/
 

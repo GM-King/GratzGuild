@@ -53,6 +53,7 @@ end
 function methods:GetText() return self.text end
 function methods:SetFont(path, size, flags) self.font, self.fontSize = path, size end
 function methods:GetStringHeight()
+    assert(self.kind == "FontString", "GetStringHeight is only available on FontString")
     local lines = 0
     for line in (self.text .. "\n"):gmatch("(.-)\n") do lines = lines + math.max(1, math.ceil(#line * (self.fontSize or 12) * 0.52 / self.width)) end
     return lines * ((self.fontSize or 12) + 3)

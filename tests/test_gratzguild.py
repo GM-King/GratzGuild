@@ -724,6 +724,9 @@ class UITests(unittest.TestCase):
             lua.execute("""
                 gg.UI.Toggle(true); gg.UI.SetTab('settings')
                 local u=gg.UI
+                assert(not pcall(function() u.exclusions:GetStringHeight() end))
+                u.exclusions:SetText('')
+                u.exclusions:SetText('Other-TestRealm')
                 assert(u.defaultGrats.points[1][5]+u.defaultGrats:GetHeight()<435)
                 assert(u.defaultDings:GetText():find('BIG DINGUS',1,true))
                 for _,e in ipairs({u.extraPhrases,u.exclusions}) do

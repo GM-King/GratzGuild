@@ -77,8 +77,13 @@ local function edit(parent, x, y, width, height, multiline)
     e.holder, e.scroll = holder, scroll
     if multiline then
         local minimum = height - 12
+        -- GetStringHeight belongs to FontString, not EditBox.
+        local measure = holder:CreateFontString(nil, "OVERLAY")
+        measure:SetFont("Fonts\\FRIZQT__.TTF", 12, "")
+        measure:SetWidth(e:GetWidth()); measure:Hide()
         local function resize()
-            e:SetHeight(math.max(minimum, e:GetStringHeight() + 12))
+            measure:SetText(e:GetText())
+            e:SetHeight(math.max(minimum, measure:GetStringHeight() + 12))
             scroll:SetVerticalScroll(math.min(scroll:GetVerticalScroll(), math.max(0, e:GetHeight() - minimum)))
         end
         e:SetScript("OnTextChanged", resize)
