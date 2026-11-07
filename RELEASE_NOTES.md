@@ -1,6 +1,7 @@
-# GratzGuild 1.3.4
+# GratzGuild 1.3.5
 
-- Add Deselect all directly to the Ledger roster page.
-- Clear the entire saved announcement selection, including filtered and offscreen guildmates, without changing tracking or balances.
+- Fix mouse focus and scrolling in Extra gratz phrases and other-alts/exclusions fields.
+- Show the complete built-in gratz reference above custom phrases and ding triggers beside auto-grats.
+- Preserve saved phrases, exclusions and built-in recognition.
 
-Live WoW Forever gameplay verification remains pending.
+Live WoW Forever interaction verification remains pending.

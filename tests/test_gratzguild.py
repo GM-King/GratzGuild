@@ -718,6 +718,38 @@ class ReplyWindowTests(unittest.TestCase):
         """)
 
 class UITests(unittest.TestCase):
+    def test_multiline_settings_focus_scroll_and_persistence(self):
+        for screen in ((1920,1080),(1280,720)):
+            lua, gg = runtime(ui=True, screen=screen)
+            lua.execute("""
+                gg.UI.Toggle(true); gg.UI.SetTab('settings')
+                local u=gg.UI
+                assert(u.defaultGrats.points[1][5]+u.defaultGrats:GetHeight()<435)
+                assert(u.defaultDings:GetText():find('BIG DINGUS',1,true))
+                for _,e in ipairs({u.extraPhrases,u.exclusions}) do
+                    assert(e.mouseEnabled and e.holder.mouseEnabled and e.scroll.mouseEnabled)
+                    e.holder.scripts.OnMouseDown(); assert(e.focus)
+                    e.scripts.OnEscapePressed(e); assert(not e.focus)
+                    e.scroll.scripts.OnMouseDown(); assert(e.focus)
+                    assert(not e.scripts.OnEnterPressed)
+                end
+                u.extraPhrases:SetText(string.rep('well done'..string.char(10),40))
+                u.phraseTest:SetText('well done'); assert(u.phraseResult:GetText():find('Grats detected',1,true))
+                u.extraPhrases.scripts.OnCursorChanged(u.extraPhrases,0,-500,2,15)
+                assert(u.extraPhrases.scroll:GetVerticalScroll()>0)
+                u.extraPhrases.scroll.scripts.OnMouseWheel(u.extraPhrases.scroll,1)
+                u.exclusions:SetText('Other-TestRealm'..string.char(10)..'Another-TestRealm')
+                u.SaveSettings(); u.SetTab('ledger'); u.SetTab('settings')
+                assert(u.extraPhrases:GetText():find('well done',1,true))
+                assert(gg.Core.db.exclusions['other-testrealm'] and gg.Core.db.exclusions['another-testrealm'])
+                u.extraPhrases:SetText(''); u.SaveSettings()
+                assert(gg.Core.db.settings.extraPhrases=='' and gg.Core.IsGrats('Gratez'))
+                assert(gg.Core.db.exclusions['other-testrealm'])
+                assert(u.extraPhrases:GetHeight()>=103)
+                u.settingsScroll.scripts.OnMouseWheel(u.settingsScroll,-100)
+                assert(u.settingsScroll:GetVerticalScroll()==u.settingsScroll.child:GetHeight()-435)
+            """)
+
     def test_sending_preview_remains_the_queued_snapshot(self):
         lua, gg = runtime(ui=True)
         lua.execute("""

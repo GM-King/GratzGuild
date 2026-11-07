@@ -100,7 +100,7 @@ function methods:CreateAnimationGroup() return object("AnimationGroup", nil, sel
 function methods:CreateAnimation(kind) return object("Animation", nil, self) end
 function methods:Play() self.playing = true end
 function methods:Stop() self.playing = false end
-for _, method in ipairs({"SetMovable", "SetClampedToScreen", "EnableMouse", "EnableMouseWheel", "RegisterForDrag",
+for _, method in ipairs({"SetMovable", "SetClampedToScreen", "EnableMouseWheel", "RegisterForDrag",
     "RegisterForClicks", "StartMoving", "StopMovingOrSizing", "SetDuration", "SetOrder", "SetFromAlpha", "SetToAlpha"}) do methods[method] = function() end end
 
 UIParent = object("Root", "UIParent"); UIParent:SetSize(1920, 1080)
@@ -163,3 +163,8 @@ function mockPreview(gg, tier)
     gg.Celebrations.Stop()
     return gg.Celebrations.Enqueue(gg.Celebrations.Pick(tier), tier, nil, true)
 end
+
+function methods:EnableMouse(value) self.mouseEnabled = value end
+function methods:SetFocus() self.focus = true; if self.scripts.OnEditFocusGained then self.scripts.OnEditFocusGained(self) end end
+function methods:SetVerticalScroll(value) self.verticalScroll = value end
+function methods:GetVerticalScroll() return self.verticalScroll or 0 end
