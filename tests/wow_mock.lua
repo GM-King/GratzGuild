@@ -169,3 +169,5 @@ function methods:EnableMouse(value) self.mouseEnabled = value end
 function methods:SetFocus() self.focus = true; if self.scripts.OnEditFocusGained then self.scripts.OnEditFocusGained(self) end end
 function methods:SetVerticalScroll(value) self.verticalScroll = value end
 function methods:GetVerticalScroll() return self.verticalScroll or 0 end
+
+function methods:SetBlinkSpeed(value) self.blinkSpeed = value end

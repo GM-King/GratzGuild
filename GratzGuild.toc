@@ -2,7 +2,7 @@
 ## Title: |cffffce75GratzGuild|r
 ## Notes: A little celebration. A very serious grats ledger.
 ## Author: Dan
-## Version: 1.3.6
+## Version: 1.3.7
 ## SavedVariables: GratzGuildDB
 ## IconTexture: Interface\AddOns\GratzGuild\Media\Murloc
 ## Category: Chat

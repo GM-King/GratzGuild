@@ -753,6 +753,33 @@ class UITests(unittest.TestCase):
                 assert(u.settingsScroll:GetVerticalScroll()==u.settingsScroll.child:GetHeight()-435)
             """)
 
+    def test_extra_phrase_separators_and_cursor_configuration(self):
+        lua, gg = runtime(ui=True)
+        lua.execute("""
+            gg.UI.Toggle(true); gg.UI.SetTab('settings')
+            local u=gg.UI
+            local extras='well done, nice work; great job'..string.char(10)..'good effort;; ,'
+            u.extraPhrases:SetText(extras)
+            for _,phrase in ipairs({'well done','nice work','great job','good effort'}) do
+                assert(gg.Core.IsGrats(phrase,extras))
+                u.phraseTest:SetText(phrase)
+                assert(u.phraseResult:GetText():find('Grats detected',1,true))
+            end
+            assert(not gg.Core.IsGrats('well',extras))
+            assert(not gg.Core.IsGrats('unrelated message',extras))
+            assert(not gg.Core.IsGrats('unrelated message',' , ; '..string.char(10)))
+            u.SaveSettings(); u.SetTab('ledger'); u.SetTab('settings')
+            assert(u.extraPhrases:GetText()==extras)
+            for _,e in ipairs({u.extraPhrases,u.exclusions}) do
+                assert(e.blinkSpeed==0.5 and e.insets[1]>=4 and e.insets[3]>=3)
+                e.scroll.scripts.OnMouseDown(); assert(e.focus)
+                e.scripts.OnCursorChanged(e,0,0,1,15)
+                assert(e.scroll:GetVerticalScroll()==0)
+                e.scripts.OnEscapePressed(e); assert(not e.focus)
+            end
+            assert(gg.Core.IsGrats('gratez',extras))
+        """)
+
     def test_sending_preview_remains_the_queued_snapshot(self):
         lua, gg = runtime(ui=True)
         lua.execute("""

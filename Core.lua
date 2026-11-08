@@ -198,7 +198,7 @@ local function matches(normalized, extras)
     extras = tostring(extras or "")
     if extras ~= extraText then
         extraText, extraNeedles = extras, {}
-        for phrase in extras:gmatch("[^\r\n]+") do
+        for phrase in extras:gmatch("[^,;\r\n]+") do
             local needle = C.Normalized(phrase)
             if needle ~= "  " then extraNeedles[#extraNeedles + 1] = needle end
         end
