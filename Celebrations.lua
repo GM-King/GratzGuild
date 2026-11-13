@@ -40,17 +40,24 @@ function S.Stop()
     S.StopCurrent()
 end
 
-function S.Start(guild, level, owner, at)
+function S.Start(guild, level, owner, at, source)
     S.Stop()
     if not S.IsHorde() then guild.celebration = nil; return end
     guild.celebrationSerial = (guild.celebrationSerial or 0) + 1
-    guild.celebration = {id = guild.celebrationSerial, count = 0, level = level, owner = owner, at = at, fired = {}}
+    guild.celebration = {id = guild.celebrationSerial, count = 0, level = level, owner = owner, at = at, expiresAt = at + 300, source = source or "levelUp", fired = {}}
     M.Dirty()
 end
 
+function S.Remaining(guild, at)
+    local s = guild and guild.celebration
+    return s and math.max(0, (s.expiresAt or s.at + 300) - (at or M.Now())) or 0
+end
+function S.OpenParticipation()
+    if M.guild and S.Remaining(M.guild) == 0 then S.Start(M.guild, nil, M.playerKey, M.Now(), "gratzButton") end
+end
 function S.Receive(guild, id, receivedAt, creditWindow)
     local session = guild and guild.celebration
-    if not S.IsHorde() or not session or id ~= session.id or not C.CanCredit(guild, receivedAt or M.Now(), creditWindow) then return end
+    if not S.IsHorde() or not session or id ~= session.id or (receivedAt or M.Now()) < session.at or (receivedAt or M.Now()) >= (session.expiresAt or session.at + 300) then return end
     session.count = (session.count or 0) + 1
     session.fired = session.fired or {}
     local tier = session.count

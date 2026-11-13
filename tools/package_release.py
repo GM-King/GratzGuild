@@ -7,6 +7,9 @@ def main():
     files = {ROOT/'GratzGuild.toc', ROOT/'README.md'}
     for line in (ROOT/'GratzGuild.toc').read_text().splitlines():
         if line.strip() and not line.startswith('#'): files.add(ROOT/line.strip())
+    files.add(ROOT/'sounds'/'ParryWoodHitWood.ogg')
+    files.update((ROOT/'Media'/'GratzButton').glob('*.png'))
+    files.add(ROOT/'Media'/'GratzButton'/'ArtworkManifest.json')
     files.update((ROOT/'Media').rglob('*.tga'))
     for sound in re.findall(r'file = "([^"]+)"', (ROOT/'SoundCatalog.lua').read_text()):
         files.add(ROOT/sound.replace(chr(92), '/'))

@@ -4,3 +4,5 @@ tests/output/*-layout.json
 *.bak-*
 releases/
 tests/output/
+
+.art-runtime/

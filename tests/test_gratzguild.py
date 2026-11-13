@@ -14,7 +14,7 @@ def runtime(ui=False, screen=(1920, 1080)):
     lua.globals().UIParent.SetSize(lua.globals().UIParent, *screen)
     gg = lua.table()
     loader = lua.eval("function(source, gg) assert(loadstring(source))('GratzGuild', gg) end")
-    for name in ("Core.lua", "SoundCatalog.lua", "Main.lua", "Celebrations.lua", "UI.lua") if ui else ("Core.lua", "SoundCatalog.lua", "Main.lua", "Celebrations.lua"):
+    for name in ("Core.lua", "SoundCatalog.lua", "Main.lua", "Celebrations.lua", "GratzButton.lua", "UI.lua") if ui else ("Core.lua", "SoundCatalog.lua", "Main.lua", "Celebrations.lua", "GratzButton.lua"):
         loader((ROOT / name).read_text(encoding="utf-8"), gg)
     lua.globals().gg = gg
     lua.execute("""
@@ -140,6 +140,8 @@ class TrackingTests(unittest.TestCase):
             mockIncoming(gg, 'CHAT_MSG_GUILD', 'BIG DINGUS', 'Thrall', 102)
             mockIncoming(gg, 'CHAT_MSG_GUILD', 'BIG DINGUS', 'Thrall', 103)
             gg.Main.Tick(2)
+            assert(#mockChat == before)
+            gg.GratzButton.Press()
             assert(#mockChat == before + 1)
         """)
 
@@ -162,22 +164,23 @@ class TrackingTests(unittest.TestCase):
             assert(#gg.Main.queue == 0)
         """)
 
-    def test_autograts_any_channel_cooldown_and_no_loops(self):
+    def test_manual_grats_any_channel_cooldown_and_no_loops(self):
         self.run_lua("""
             gg.Core.db.settings.autoMessage = 'Gratz, {name}!'
-            mockIncoming(gg, 'CHAT_MSG_WHISPER', 'ding 41', 'Thrall', 1)
-            mockAdvance(gg, 0.2)
-            assert(#mockChat == 1 and mockChat[1].text == 'Gratz, Thrall!' and mockChat[1].channel == 'GUILD')
-            mockIncoming(gg, 'CHAT_MSG_YELL', 'DING!', 'Thrall', 2)
-            assert(#gg.Main.queue == 0)
-            mockAdvance(gg, 31)
-            mockIncoming(gg, 'CHAT_MSG_SAY', 'ding', 'Thrall', 3)
-            mockAdvance(gg, 2)
-            assert(#mockChat == 2)
-            mockIncoming(gg, 'CHAT_MSG_GUILD', 'Gratz on your ding!', 'Jaina', 4)
-            assert(#gg.Main.queue == 0)
-            mockIncoming(gg, 'CHAT_MSG_GUILD', '[GratzGuild] ding', 'Jaina', 5)
-            assert(#gg.Main.queue == 0)
+            mockIncoming(gg, 'CHAT_MSG_WHISPER', 'ding', 'Thrall', 1)
+            mockAdvance(gg,.2)
+            assert(#mockChat==0 and #gg.GratzButton.entries==1)
+            mockIncoming(gg,'CHAT_MSG_YELL','ding','Thrall',2)
+            assert(#gg.GratzButton.entries==1)
+            gg.GratzButton.Press()
+            assert(#mockChat==1 and mockChat[1].channel=='WHISPER')
+            mockAdvance(gg,31)
+            mockIncoming(gg,'CHAT_MSG_SAY','ding','Thrall',3)
+            gg.GratzButton.Press()
+            assert(#mockChat==2 and mockChat[2].channel=='SAY')
+            mockIncoming(gg,'CHAT_MSG_GUILD','Gratz on your ding!','Jaina',4)
+            mockIncoming(gg,'CHAT_MSG_GUILD','[GratzGuild] ding','Jaina',5)
+            assert(#gg.GratzButton.entries==0)
         """)
 
     def test_disabled_auto_drops_pending_reply(self):
@@ -233,7 +236,7 @@ class TrackingTests(unittest.TestCase):
         lua.execute((ROOT / 'tests' / 'wow_mock.lua').read_text(encoding='utf-8'))
         gg = lua.table()
         loader = lua.eval("function(source, gg) assert(loadstring(source))('GratzGuild', gg) end")
-        for name in ('Core.lua', 'SoundCatalog.lua', 'Main.lua', 'Celebrations.lua', 'UI.lua'):
+        for name in ('Core.lua', 'SoundCatalog.lua', 'Main.lua', 'Celebrations.lua', 'GratzButton.lua', 'UI.lua'):
             loader((ROOT / name).read_text(encoding='utf-8'), gg)
         lua.globals().gg = gg
         lua.execute("""
@@ -565,7 +568,7 @@ class CelebrationTests(unittest.TestCase):
         """)
         replacement = self.lua.table()
         loader = self.lua.eval("function(source, gg) assert(loadstring(source))('GratzGuild', gg) end")
-        for name in ('Core.lua', 'SoundCatalog.lua', 'Main.lua', 'Celebrations.lua', 'UI.lua'):
+        for name in ('Core.lua', 'SoundCatalog.lua', 'Main.lua', 'Celebrations.lua', 'GratzButton.lua', 'UI.lua'):
             loader((ROOT / name).read_text(encoding='utf-8'), replacement)
         self.lua.globals().gg = replacement
         self.run_lua("""
@@ -615,7 +618,7 @@ class ReplyWindowTests(unittest.TestCase):
             assert(g.members['thrall-testrealm'].debt==2 and g.celebration.count==1)
             assert(#mockSounds==0 and gg.Core.ReplyRemaining(g,time())==0)
             gg.UI.Toggle(true); gg.UI.SetTab('celebrations')
-            assert(gg.UI.celebrationCounter:GetText():find('WINDOW CLOSED',1,true))
+            assert(gg.UI.celebrationCounter:GetText():find('Press Gratz or level up',1,true))
             assert(not gg.Core.Repay(g,'thrall-testrealm',time(),'GUILD'))
         """)
 
@@ -713,6 +716,7 @@ class ReplyWindowTests(unittest.TestCase):
             mockAdvance(gg,301)
             mockIncoming(gg,'CHAT_MSG_GUILD','ding 42','Thrall',1)
             mockAdvance(gg,2)
+            gg.GratzButton.Press()
             assert(mockChat[#mockChat].text=='Gratz!')
             assert(gg.Main.guild.celebration.count==0)
         """)
@@ -1167,7 +1171,7 @@ class PerformanceTests(unittest.TestCase):
             mockAdvance(gg,1)
             assert(gg.Main.dirty and counts.ledger==0)
             gg.UI.Toggle(true)
-            assert(gg.UI.gratsStat:GetText()=='Grats this ding: 1' and counts.ledger>0)
+            assert(gg.UI.gratsStat:GetText()=='Reward grats: 1' and counts.ledger>0)
         """)
 
     def test_visible_countdown_only_updates_celebrations(self):
@@ -1271,8 +1275,12 @@ def export_layout():
     """)
     output = ROOT / "tests" / "output"
     output.mkdir(exist_ok=True)
-    for tab in ('ledger', 'announcements', 'celebrations', 'collection', 'settings', 'popup'):
-        if tab == 'popup':
+    for tab in ('ledger', 'announcements', 'celebrations', 'collection', 'settings', 'popup', 'gratz'):
+        if tab == 'gratz':
+            gg.UI.frame.Hide(gg.UI.frame)
+            gg.Celebrations.Stop()
+            lua.execute("mockIncoming(gg,'CHAT_MSG_GUILD','ding','Thrall',9999)")
+        elif tab == 'popup':
             gg.UI.frame.Hide(gg.UI.frame)
             gg.Celebrations.Test()
         else:
@@ -1280,7 +1288,7 @@ def export_layout():
         records = []
         for obj in lua.globals().mockObjects.values():
             record = {}
-            for field in ('id', 'kind', 'name', 'template', 'shown', 'enabled', 'width', 'height', 'text', 'fontSize', 'justifyH', 'texture', 'normalTexture', 'strata', 'checked', 'value'):
+            for field in ('id', 'kind', 'name', 'template', 'shown', 'enabled', 'width', 'height', 'text', 'fontSize', 'justifyH', 'texture', 'normalTexture', 'strata', 'checked', 'value', 'alpha'):
                 value = obj[field]
                 if isinstance(value, (str, int, float, bool)): record[field] = value
             record['parent'] = obj.parent.id if obj.parent else None

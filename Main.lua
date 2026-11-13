@@ -26,15 +26,22 @@ function M.CanSend()
     return true
 end
 
-function M.Send(text)
-    local ok, reason = M.CanSend()
-    if not ok then return false, reason end
+function M.Send(text, destination)
+    local d = destination or {kind = "GUILD"}
+    if d.kind == "GUILD" then local ok, reason = M.CanSend(); if not ok then return false, reason end end
+    if GG.GratzButton then local ok, reason = GG.GratzButton.Validate(d); if not ok then return false, reason end end
     text = C.UTF8Cut(C.ChatText(text), 255)
     if text == "" then return false, "The message is empty." end
     local send = (C_ChatInfo and C_ChatInfo.SendChatMessage) or SendChatMessage
-    if not send then return false, "This client does not provide guild chat sending." end
-    local success, result = pcall(send, text, "GUILD")
-    if not success then return false, "Guild chat could not be sent: " .. tostring(result) end
+    local ok, result
+    if d.kind == "BN_WHISPER" then
+        send = (C_BattleNet and C_BattleNet.SendWhisper) or BNSendWhisper
+        if send then ok, result = pcall(send, d.target, text) end
+    elseif d.kind == "COMMUNITIES_CHANNEL" then
+        send = C_Club and C_Club.SendMessage
+        if send then ok, result = pcall(send, d.club, d.stream, text) end
+    elseif send then ok, result = pcall(send, text, d.kind, nil, d.target) end
+    if not ok or result == false then return false, "Chat could not be submitted to " .. d.kind .. ": " .. tostring(result) end
     return true
 end
 
@@ -48,7 +55,8 @@ function M.Context()
     local key = name and C.GuildKey(name, guildRealm or M.realm) or nil
     if key ~= M.guildKey then
         if GG.Celebrations then GG.Celebrations.Stop() end
-        M.queue, M.report, M.ready = {}, nil, false
+        if GG.GratzButton then GG.GratzButton.Clear() end
+        M.queue, M.report, M.ready, M.cooldown = {}, nil, false, {}
         M.rosterDue, M.lastCapture, M.nextRoster = nil, nil, nil
         M.byGUID, M.byShort = {}, {}
         M.guild, M.guildKey = nil, key
@@ -118,7 +126,7 @@ function M.CaptureRoster()
     for _, pending in ipairs(pendingEvents) do
         if pending.kind == "chat" then
             M.HandleChat(pending.event, pending.message, pending.sender, pending.lineID, pending.guid,
-                pending.bnSenderID, pending.at, M.Now() - pending.at > 30, pending.celebrationID, pending.creditWindow or false)
+                pending.bnSenderID, pending.at, pending.session ~= M.session, pending.celebrationID, pending.creditWindow or false, nil, pending.destination)
         else C.Charge(M.guild, pending.levels, pending.player, pending.at) end
     end
     M.Dirty()
@@ -165,7 +173,7 @@ local function hasSecretChatValue(message, sender, lineID, guid, bnSenderID)
         or C.IsSecret(guid) or C.IsSecret(bnSenderID)
 end
 
-function M.HandleChat(event, message, sender, lineID, guid, bnSenderID, receivedAt, suppressAuto, celebrationID, creditWindow, classification)
+function M.HandleChat(event, message, sender, lineID, guid, bnSenderID, receivedAt, suppressAuto, celebrationID, creditWindow, classification, destination)
     if hasSecretChatValue(message, sender, lineID, guid, bnSenderID) then return end
     if not M.guild or type(message) ~= "string" or C.IsReport(message) then return end
     if event ~= "CHAT_MSG_BN_WHISPER" and M.IsSelf(sender, guid) then return end
@@ -184,36 +192,30 @@ function M.HandleChat(event, message, sender, lineID, guid, bnSenderID, received
     else grats, ding = C.Classify(message, C.db.settings.extraPhrases) end
     if grats then
         local at = receivedAt or M.Now()
-        if not C.CanCredit(M.guild, at, creditWindow) then return end
         if C.Repay(M.guild, key, at, event:gsub("CHAT_MSG_", ""), creditWindow) then M.Dirty() end
         if GG.Celebrations then GG.Celebrations.Receive(M.guild, celebrationID, at, creditWindow) end
         return
     end
-    if not suppressAuto and C.db.settings.autoEnabled and ding and (not M.cooldown[key] or now - M.cooldown[key] >= 30) then
-        local name = M.guild.members[key].name:match("^[^-]+")
-        local reply = C.Message(C.db.settings.autoMessage, name)
-        if reply == "" then return end
-        if #M.queue >= 100 then return end
-        M.cooldown[key] = now
-        table.insert(M.queue, 1, {text = reply, guildKey = M.guildKey, kind = "auto", sender = event ~= "CHAT_MSG_BN_WHISPER" and sender or nil, senderKey = key, guid = M.guild.members[key].guid})
-        M.Dirty()
+    if not suppressAuto and C.db.settings.autoEnabled and ding and (not M.cooldown[key] or (receivedAt or M.Now()) - M.cooldown[key] >= 30) then
+        if GG.GratzButton and GG.GratzButton.Add(key, destination, receivedAt) then M.cooldown[key] = receivedAt or M.Now() end
     end
 end
 
-function M.Chat(event, message, sender, _, _, _, _, _, _, _, _, lineID, guid, bnSenderID)
+function M.Chat(event, message, sender, language, channelName, _, _, _, channelIndex, channelBase, _, lineID, guid, bnSenderID)
     if hasSecretChatValue(message, sender, lineID, guid, bnSenderID) then return end
     if not M.guild or type(message) ~= "string" or C.IsReport(message) then return end
     local at = M.Now()
     local grats, ding = C.Classify(message, C.db.settings.extraPhrases)
     if not grats and not ding then return end
-    if grats and not C.CanCredit(M.guild, at) then return end
+    if grats and not C.CanCredit(M.guild, at) and (not GG.Celebrations or GG.Celebrations.Remaining(M.guild, at) == 0) then return end
+    local destination = GG.GratzButton and GG.GratzButton.Destination(event, sender, channelIndex, channelBase or channelName, bnSenderID)
     if not M.ready or #M.guild.pending > 0 then
         -- Retain arrival order so extra early grats never become credit for a later ding.
         M.guild.pending[#M.guild.pending + 1] = {kind = "chat", event = event, message = message, sender = sender,
             lineID = lineID, guid = guid, bnSenderID = bnSenderID, at = at,
-            celebrationID = M.guild.celebration and M.guild.celebration.id, creditWindow = M.guild.replyWindow}
+            celebrationID = M.guild.celebration and M.guild.celebration.id, creditWindow = M.guild.replyWindow, destination = destination, session = M.session}
     else M.HandleChat(event, message, sender, lineID, guid, bnSenderID, at, nil,
-        M.guild.celebration and M.guild.celebration.id, M.guild.replyWindow, {grats = grats, ding = ding}) end
+        M.guild.celebration and M.guild.celebration.id, M.guild.replyWindow, {grats = grats, ding = ding}, destination) end
 end
 
 function M.StartReport(lines, memberCount)
@@ -237,12 +239,13 @@ end
 
 function M.Tick(elapsed)
     M.clock = M.clock + elapsed
+    if GG.GratzButton then GG.GratzButton.Update() end
     if GG.Celebrations and (GG.Celebrations.active or #GG.Celebrations.queue > 0) then GG.Celebrations.Update(elapsed) end
     M.accumulator = (M.accumulator or 0) + elapsed
     if M.accumulator < 0.1 then return end
     M.accumulator = 0
     local now = M.Time()
-    local remaining = C.ReplyRemaining(M.guild, M.Now())
+    local remaining = GG.Celebrations and GG.Celebrations.Remaining(M.guild) or 0
     if remaining ~= M.lastReplyRemaining then
         M.lastReplyRemaining = remaining
         if GG.UI and GG.UI.frame and GG.UI.frame:IsShown() and GG.UI.tab == "celebrations" then GG.UI.RefreshCelebrations() end
@@ -279,6 +282,7 @@ function M.Tick(elapsed)
 end
 
 function M.Initialize()
+    M.session = {}
     GratzGuildDB = C.Initialize(GratzGuildDB)
     M.realm = (GetNormalizedRealmName and GetNormalizedRealmName()) or GetRealmName()
     local name, realm
@@ -297,6 +301,7 @@ function M.Initialize()
     M.RequestRoster()
     M.CaptureRoster()
     if GG.Celebrations then GG.Celebrations.Initialize() end
+    if GG.GratzButton then GG.GratzButton.Initialize() end
     if GG.UI then GG.UI.Initialize() end
     M.Dirty()
 end
@@ -315,7 +320,7 @@ local function activate()
     M.initialized = true
     M.Initialize()
     frame:UnregisterEvent("PLAYER_LOGIN")
-    for _, name in ipairs({"PLAYER_LEVEL_UP", "PLAYER_GUILD_UPDATE", "GUILD_ROSTER_UPDATE", "PLAYER_ENTERING_WORLD"}) do
+    for _, name in ipairs({"PLAYER_REGEN_DISABLED", "PLAYER_REGEN_ENABLED", "PLAYER_LEVEL_UP", "PLAYER_GUILD_UPDATE", "GUILD_ROSTER_UPDATE", "PLAYER_ENTERING_WORLD"}) do
         frame:RegisterEvent(name)
     end
     for _, name in ipairs(incoming) do pcall(frame.RegisterEvent, frame, name) end
@@ -328,6 +333,8 @@ frame:SetScript("OnEvent", function(_, event, ...)
         frame:UnregisterEvent("ADDON_LOADED")
         if IsLoggedIn and IsLoggedIn() then activate() end
     elseif event == "PLAYER_LOGIN" then activate()
+    elseif event == "PLAYER_REGEN_DISABLED" or event == "PLAYER_REGEN_ENABLED" then
+        if GG.GratzButton then GG.GratzButton.Combat(event == "PLAYER_REGEN_DISABLED") end
     elseif event == "PLAYER_LEVEL_UP" then M.LevelUp(...)
     elseif event == "GUILD_ROSTER_UPDATE" then
         M.Context()

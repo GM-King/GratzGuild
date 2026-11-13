@@ -22,9 +22,23 @@ The Ledger roster page now has a **Deselect all** button that clears the entire 
 
 Settings now lists all default grats and ding phrases in a scrollable reference. **Gratez** counts as congratulations; **BIG DINGUS** triggers automatic grats. Case, punctuation and stretched repeated letters are accepted. `dingus` alone and `big dinguses` do not count. Your existing customization and saved progress are preserved.
 
+## Version 1.4.1 — Press Gratz, earn cards
+
+Guildmates' dings now light up a large movable Gratz button instead of sending automatic replies. The first ding gives 30 seconds; each additional accepted ding adds 10 seconds. The button waits out combat and pauses its countdown during combat. Repeat dings from one guildmate are suppressed for 30 seconds across channels.
+
+Left-click once to congratulate everyone, sending once per original chat destination. Right-drag to move the button. Settings provides **Show Gratz button**, **Preview / Move**, and **Reset position**. The painted orc hand slaps the crimson button with your supplied wood-hit sound. Preview mode sends nothing and grants no rewards. Reduced motion uses a brief highlight.
+
+Replies use the default **Gratz!** or your saved custom text as written, without adding names or expanding placeholders. Use the small **X** on the Gratz button to skip the entire pending batch without sending or opening rewards; future eligible dings still appear. Replies retain their original destination, including whisper recipients, numbered channels, and community streams. Unavailable destinations never fall back to guild chat. Detectable failures remain for manual retry until expiry; successfully submitted replies are removed. Pending dings are cleared on reload, guild change, or disabling the button.
+
+A real press that submits at least one reply opens a five-minute participation reward run when none is active. Subsequent eligible incoming gratz messages count toward the existing 5/10/15 card milestones, even when congratulating somebody else. Clicking early captures more later replies. Another press during that run does not extend its deadline, reset progress, or rearm milestones. Combat does not pause rewards. Your own level-up still starts a fresh run. Collection unlocks remain permanent. Rewards and debt repayment have separate windows: helping somebody else never creates debt or extends your personal repayment period. Reward progress and original expiry survive reloads; pre-click buffered replies cannot count retroactively.
+
+The new button artwork follows the supplied low-angle reference and existing painted Horde style. Only the thumbnail is visible on the palm-side hand. Runtime textures are 512 × 512 uncompressed RGBA TGA; original artwork and provenance are in `Media/GratzButton`. Impact audio is `sounds/ParryWoodHitWood.ogg`.
+
+Run all checks with `python -m unittest discover -s tests -v`. There are 88 automated checks including Lua 5.1 gameplay mocks. Layout previews are approximations, not game screenshots. Live smoke test remains required: ask two guildmates to ding in different channels; verify no reply until clicked, combat pause/resume, combined routing, right-drag placement, impact animation/audio, and five-minute 5/10/15 card unlocks. Also verify failed sends and channel changes do not redirect replies.
+
 ## Installation
 
-Download **GratzGuild-1.3.7.zip** from https://github.com/GM-King/GratzGuild/releases/tag/v1.3.7 and extract the `GratzGuild` folder into your Forever client's `Interface/AddOns` folder. Check that `Interface/AddOns/GratzGuild/GratzGuild.toc` exists, without an extra nested folder. No other addons are required. To update, close WoW and replace the addon folder; retain your WTF folder to preserve saved progress.
+Download **GratzGuild-1.4.1.zip** from https://github.com/GM-King/GratzGuild/releases/tag/v1.4.1 and extract the `GratzGuild` folder into your Forever client's `Interface/AddOns` folder. Check that `Interface/AddOns/GratzGuild/GratzGuild.toc` exists, without an extra nested folder. No other addons are required. To update, close WoW and replace the addon folder; retain your WTF folder to preserve saved progress.
 
 The player ZIP includes runtime textures and sounds. Original PNG artwork, development tools and tests are available in the source repository. Website: https://gm-king.github.io/GratzGuild/
 
@@ -32,7 +46,7 @@ The player ZIP includes runtime textures and sounds. Original PNG artwork, devel
 
 1. Restart WoW if it was running when the new addon folder was created. Enable **GratzGuild** in the character-selection AddOns list.
 2. Log in and type **`/gg`** or **`/gratzguild`**. The minimap button also opens the ledger; right-click opens Settings and dragging moves it around the minimap.
-3. In Settings, edit your messages and press **Save messages & phrases**. Both automations start enabled: **Ding!** for your level-ups and **Gratz!** for guildmates' dings.
+3. In Settings, edit your messages and press **Save messages & phrases**. Level-up announcements and the Gratz button start enabled.
 4. Use the Ledger's announcement checkboxes, then open Announcements, review the exact preview and press **Send to Guild**. Reports have a heading and one guildmate per line. Selecting more than 10 names requires confirmation before the report is queued.
 
 `/gg collection` opens the Collection. `/gg settings` opens Settings. `/gg announce` opens the report preview. `/gg resetui` restores the centred window and default scale. Drag the window to move it; Escape closes it.
@@ -93,14 +107,14 @@ Built-in English congratulations include `grats`, `gratz`, `congrats`, `congratz
 
 Case, punctuation and stretched repeated letters are accepted, such as **GRAAAATZZZ!!!**. Whole words are matched, so `gzipped` and `disgrats` do not count. Item links, textures and atlas labels are ignored. Add other languages or phrases one per line under **Extra grats phrases**. The phrase tester uses the same matching rules as actual chat and previews unsaved phrase edits.
 
-When another guildmate says a standalone **ding** word or the phrase **BIG DINGUS** in any monitored channel, auto-grats replies in **guild chat**. `Ding!`, `Diiiing 42` and `ding, finally!` count. `standing` and `dinghy` do not. Replies have a 30-second cooldown per sender; debt repayments have no cooldown. Your own characters' messages, GratzGuild reports and messages containing grats words never trigger a reply. Old dings buffered for more than 30 seconds are not automatically answered.
+When another guildmate says **ding** or **BIG DINGUS**, the Gratz button offers a manual reply to the original destination, using the rules in Version 1.4.0 above. Your own characters, addon reports, and messages already containing grats words do not trigger it.
 
 Message placeholders:
 
 | Message | Placeholders | Example |
 | --- | --- | --- |
 | My level-up | `{level}`, `{name}` | `Ding! {name} is now level {level}!` |
-| Auto-grats | `{name}` | `Gratz, {name}! For the Horde!` |
+| Gratz button | None; sent as written | `Gratz! For the Horde!` |
 
 Messages are limited to 255 UTF-8 bytes without splitting characters. Long debt reports split into multiple messages, each carrying the `[GratzGuild]` prefix. Reports are sorted by debt descending, then name, and sent at 1.5-second intervals. You can cancel the remainder. Changing guilds cancels queued messages. Guild-rank restrictions or client API failures are reported locally and stop the queue.
 

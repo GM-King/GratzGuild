@@ -75,6 +75,7 @@ def main():
                 continue
             seen[sound['sha256']] = sound['file']
             catalog[group].append(sound)
+    catalog['buttonHit'] = dict(file='sounds\\ParryWoodHitWood.ogg', portrait='', label='Gratz button impact', duration=round(ogg_duration((ROOT/'sounds'/'ParryWoodHitWood.ogg').read_bytes()),3))
     catalog['horde'] = entry(ROOT / 'sounds' / 'for_the_horde.mp3')
     catalog['hordeRare'] = entry(ROOT / 'sounds' / 'for_the_horde_rare.mp3')
     (ROOT / 'Media' / 'SoundCatalog.json').write_text(json.dumps(dict(catalog=catalog, duplicates=duplicates), indent=2), encoding='utf-8')
@@ -86,6 +87,7 @@ def main():
         lines.append('    %s = {' % group)
         lines.extend('        ' + row(sound) + ',' for sound in catalog[group])
         lines.append('    },')
+    lines.append('    buttonHit = ' + row(catalog['buttonHit']) + ',')
     lines.extend(['    horde = ' + row(catalog['horde']) + ',', '    hordeRare = ' + row(catalog['hordeRare']) + ',', '}'])
     (ROOT / 'SoundCatalog.lua').write_text('\n'.join(lines) + '\n', encoding='utf-8')
     print(f"{len(catalog['cheer'])} cheer clips, {len(catalog['congrats'])} congratulations clips, {len(duplicates)} identical copies omitted")

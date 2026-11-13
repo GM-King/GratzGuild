@@ -47,8 +47,12 @@ function C.GetGuild(name, realm)
     g.members, g.history, g.pending = g.members or {}, g.history or {}, g.pending or {}
     g.dings, g.repayments = g.dings or 0, g.repayments or 0
     -- Carry the latest saved ding into the new rule without opening a fresh login window.
-    if not g.replyWindow and g.celebration and type(g.celebration.at) == "number" then
+    if not g.replyWindow and g.celebration and g.celebration.source ~= "gratzButton" and type(g.celebration.at) == "number" then
         C.StartReplyWindow(g, g.celebration.at)
+    end
+    if g.celebration then
+        g.celebration.source = g.celebration.source or "levelUp"
+        g.celebration.expiresAt = g.celebration.expiresAt or (g.celebration.at + 300)
     end
     return g, key
 end

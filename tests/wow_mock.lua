@@ -171,3 +171,5 @@ function methods:SetVerticalScroll(value) self.verticalScroll = value end
 function methods:GetVerticalScroll() return self.verticalScroll or 0 end
 
 function methods:SetBlinkSpeed(value) self.blinkSpeed = value end
+
+function methods:SetBlendMode(value) self.blendMode = value end

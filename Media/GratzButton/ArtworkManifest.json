@@ -1,0 +1,8 @@
+{
+  "generator": "built-in image_gen",
+  "source": "exec-f29c2df8-3053-4a26-ac7d-4e598488afea.png",
+  "correction": "Palm-side fingers have no visible nails; thumbnail retained.",
+  "composition": "Reference button lower left, raised hand upper right.",
+  "runtime": "Separated alpha components, aspect preserved in 512px square textures.",
+  "final_prompt": "Precise anatomy correction only: this hand is viewed from the PALM side. Remove ALL fingernails from the four long fingers and replace those nail patches with continuous green fleshy fingertip pads matching surrounding painted skin. Keep ONLY the thumbnail on the upright thumb at upper-right. No other fingernails visible anywhere. Preserve everything else exactly: composition, framing, pose, fingers together, painterly cartoon Warcraft style, button text Gratz!, colors, bracer, transparent background. Do not change button or hand silhouette."
+}

@@ -50,6 +50,7 @@ GG.Sounds = {
         { file = "sounds\\congrats\\VO_DHBloodElfMaleCongratulations01.ogg", portrait = "SkyborneMale", label = "Skyborne male", duration = 1.353 },
         { file = "sounds\\congrats\\VO_DHBloodElfMaleCongratulations03.ogg", portrait = "SkyborneMale", label = "Skyborne male", duration = 1.524 },
     },
+    buttonHit = { file = "sounds\\ParryWoodHitWood.ogg", portrait = "", label = "Gratz button impact", duration = 1.51 },
     horde = { file = "sounds\\for_the_horde.mp3", portrait = "ForTheHorde", label = "Thrall & Sylvanas", duration = 2.403 },
     hordeRare = { file = "sounds\\for_the_horde_rare.mp3", portrait = "ForTheHorde", label = "Thrall & Sylvanas", duration = 2.717 },
 }

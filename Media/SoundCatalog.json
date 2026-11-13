@@ -319,6 +319,12 @@
         "sha256": "558a9139b786b19cf4c6405f7dcf46dd29042e83ca4800a8b37e151eeeb987e0"
       }
     ],
+    "buttonHit": {
+      "file": "sounds\\ParryWoodHitWood.ogg",
+      "portrait": "",
+      "label": "Gratz button impact",
+      "duration": 1.51
+    },
     "horde": {
       "file": "sounds\\for_the_horde.mp3",
       "portrait": "ForTheHorde",

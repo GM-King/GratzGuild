@@ -41,3 +41,7 @@ Use case: stylized-concept. Asset type: transparent mascot texture for a World o
 ## Final Horde prompt
 
 Use case: stylized-concept. Asset type: transparent wide character-group illustration for a Warcraft addon GratzGuild. Primary request: three adorable adult Horde adventurers cheering together: a green orc woman with tusks and dark braided hair in crimson leather armour, a cheerful blue troll man with tusks and swept-back red hair, and a fluffy friendly brown tauren with horns and gold-trimmed shoulder armour. Polished hand-painted Warcraft fantasy game art, cute warm expressive faces, celebratory pose, small golden confetti, coordinated crimson and gold outfits. Composition: horizontal tightly grouped waist-up ensemble with all heads horns and hands fully inside frame, character group fills a wide 2:1 canvas. Transparent background, no text, no watermark, no scenery or UI. High-quality brushwork and clean silhouettes readable at 300px wide.
+
+## Gratz button — 1.4.0
+
+Built-in image generation used the user-provided button/hand reference for framing and OrcMale for painted style. The final correction removes finger nails visible from the palm side, retaining only the thumbnail. `GratzButton/Composition.png` preserves that result. The disconnected alpha components are extracted reproducibly by `tools/package_button_art.py` into 512px square PNG/TGA textures, with proportions preserved. Button lettering is painted into the cap. See the adjacent artwork manifest.

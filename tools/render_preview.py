@@ -18,7 +18,7 @@ def font(size, title=False):
 def render(tab):
     records = json.loads((OUT / f'{tab}-layout.json').read_text(encoding='utf-8'))
     by_id = {r['id']: r for r in records}
-    root_name = 'GratzGuildCelebrationFrame' if tab == 'popup' else 'GratzGuildFrame'
+    root_name = 'GratzGuildGratzButton' if tab == 'gratz' else 'GratzGuildCelebrationFrame' if tab == 'popup' else 'GratzGuildFrame'
     root = next(r for r in records if r.get('name') == root_name)
 
     @lru_cache(None)
@@ -58,6 +58,7 @@ def render(tab):
     draw = ImageDraw.Draw(image)
     for r in records:
         if not visible(r['id']): continue
+        if r.get('alpha', 1) == 0: continue
         if r['kind'] in ('Animation', 'AnimationGroup', 'Root'): continue
         x, y, w, h = rect(r['id'])
         x, y, w, h = map(lambda v: int(round(v)), (x, y, w, h))
